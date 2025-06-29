@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Business Registration - Township Directory</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="gps.js" defer></script>
+</head>
+<body>
+  <h2>Register Your Business</h2>
+  <form id="businessForm">
+    <label>Business Name:</label><br>
+    <input type="text" name="name" required><br>
+
+    <label>Category:</label><br>
+    <select name="category" required>
+      <option value="Food">Food</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Services">Services</option>
+      <option value="Retail">Retail</option>
+      <option value="Other">Other</option>
+    </select><br>
+
+    <label>Phone:</label><br>
+    <input type="tel" name="phone" required><br>
+
+    <label>Address:</label><br>
+    <input type="text" name="address" required><br>
+
+    <label>Description:</label><br>
+    <textarea name="description"></textarea><br>
+
+    <label>Latitude:</label><br>
+    <input type="text" id="lat" name="geo.lat" readonly><br>
+
+    <label>Longitude:</label><br>
+    <input type="text" id="lng" name="geo.lng" readonly><br>
+
+    <button type="submit">Register Business</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('businessForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      data.geo = {
+        lat: parseFloat(data['geo.lat']),
+        lng: parseFloat(data['geo.lng'])
+      };
+      delete data['geo.lat'];
+      delete data['geo.lng'];
+
+      const res = await fetch('/api/business/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) alert('Business registered successfully!');
+      else alert('Error registering business.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

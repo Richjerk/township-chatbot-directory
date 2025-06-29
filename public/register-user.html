@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration - Township Directory</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="gps.js" defer></script>
+</head>
+<body>
+  <h2>Register as a User</h2>
+  <form id="userForm">
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br>
+
+    <label>Phone:</label><br>
+    <input type="tel" name="phone" required><br>
+
+    <label>Latitude:</label><br>
+    <input type="text" id="lat" name="location.lat" readonly><br>
+
+    <label>Longitude:</label><br>
+    <input type="text" id="lng" name="location.lng" readonly><br>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('userForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Convert nested location keys from string to proper object
+      data.location = {
+        lat: parseFloat(data['location.lat']),
+        lng: parseFloat(data['location.lng'])
+      };
+      delete data['location.lat'];
+      delete data['location.lng'];
+
+      const res = await fetch('/api/user/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) alert('User registered successfully!');
+      else alert('Error registering user.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>

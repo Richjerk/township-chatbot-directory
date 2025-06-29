@@ -1,0 +1,6 @@
+@echo off
+echo Starting backend server...
+start cmd /k "cd /d . && node server.js"
+timeout /t 2
+echo Starting frontend...
+start cmd /k "cd /d client && npm run dev"

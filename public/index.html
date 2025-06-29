@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Township Business Directory</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>🏘️ Township Business Directory</h1>
+  <nav>
+    <a href="register-user.html">Register as User</a>
+    <a href="register-business.html">Register Your Business</a>
+  </nav>
+
+  <div id="business-list"></div>
+
+  <script>
+    fetch('/api/business/list')
+      .then(res => res.json())
+      .then(data => {
+        const categories = [...new Set(data.map(b => b.category))];
+        const container = document.getElementById('business-list');
+        container.innerHTML = categories.map(cat => {
+          const items = data.filter(b => b.category === cat);
+          return `
+            <h3>${cat}</h3>
+            <ul>
+              ${items
+                .map(
+                  (b) =>
+                    `<li><strong>${b.name}</strong> — ${b.description || 'No description'}</li>`
+                )
+                .join('')}
+            </ul>`;
+        }).join('');
+      })
+      .catch(err => {
+        document.getElementById('business-list').innerHTML = '<p>Error loading businesses.</p>';
+        console.error('Error fetching business list:', err);
+      });
+  </script>
+
+  <!-- Optional: Include your main.js only if it exists and is needed -->
+  <!-- <script type="module" src="/src/main.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Township Business Directory</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f2f2f2;
+      color: #333;
+    }
+    .chatbot, .form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    input, textarea {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 1rem;
+      background: #ff9900;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏪 Township Small Business Chatbot</h1>
+
+  <div class="form">
+    <h2>📍 Enable GPS Location</h2>
+    <button onclick="getGeoLocation()">Share My Location</button>
+    <p id="location-output"></p>
+  </div>
+
+  <div class="chatbot">
+    <h2>🤖 Ask the Chatbot</h2>
+    <textarea id="user-input" placeholder="What service or product are you looking for?"></textarea>
+    <button onclick="askChatbot()">Send</button>
+    <p><strong>Response:</strong></p>
+    <div id="bot-response">Waiting for your question...</div>
+  </div>
+
+  <script>
+    function getGeoLocation() {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const { latitude, longitude } = position.coords;
+          document.getElementById('location-output').textContent = 
+            `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }, (error) => {
+          document.getElementById('location-output').textContent = 
+            `❌ Error: ${error.message}`;
+        });
+      } else {
+        document.getElementById('location-output').textContent = '❌ Geolocation not supported.';
+      }
+    }
+
+    function askChatbot() {
+      const userMessage = document.getElementById('user-input').value;
+      const botReply = document.getElementById('bot-response');
+
+      botReply.textContent = '⏳ Thinking...';
+
+      fetch('http://localhost:3001/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: userMessage })
+      })
+        .then(res => res.json())
+        .then(data => {
+          botReply.textContent = data.response;
+        })
+        .catch(err => {
+          botReply.textContent = '❌ Chatbot error: ' + err.message;
+        });
+    }
+
+    // Load business listings on page load
+    window.onload = () => {
+      fetch('http://localhost:3002/api/businesses')
+        .then(res => res.json())
+        .then(data => {
+          const container = document.createElement('div');
+          container.className = 'form';
+          container.innerHTML = '<h2>📍 Listed Businesses</h2>' + data.map(biz => `
+            <p><strong>${biz.name}</strong><br/>
+            ${biz.description}<br/>
+            ${biz.address} - ${biz.phone}</p>
+          `).join('');
+          document.body.appendChild(container);
+        })
+        .catch(err => {
+          console.error('Failed to load businesses:', err);
+        });
+    };
+  </script>
+
+  <!-- PWA Service Worker Registration -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

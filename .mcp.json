@@ -1,0 +1,14 @@
+{
+  "roles": ["admin", "business", "user"],
+  "features": {
+    "faq_bot": true,
+    "dashboard_roles": true,
+    "analytics": {
+      "weekly_orders": true,
+      "average_distance": true
+    }
+  }
+}
+
+
+
