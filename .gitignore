@@ -1,6 +1,8 @@
-.env
+# Ignore generated folders
 node_modules/
-dist/
 .vite/
-netlify/
+.netlify/
+dist/
+.env
+
 
