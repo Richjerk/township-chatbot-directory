@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: township-backend
+    env: node
+    plan: free
+    branch: main
+    buildCommand: npm install
+    startCommand: node app.js
+    autoDeploy: true
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://township_chatbot:Daniel%409615@cluster0.x0stlrp.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster0
