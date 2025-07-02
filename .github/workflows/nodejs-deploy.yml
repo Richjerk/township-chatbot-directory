@@ -1,0 +1,34 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Lint code
+      run: echo "Linting skipped for now"
+
+    - name: Run tests (placeholder)
+      run: echo "Add tests here"
+
+    - name: Deploy to Render (or other)
+      run: echo "Manual deployment or use Render auto-deploy with webhook"
+
