@@ -4,29 +4,18 @@
   command = "npm run build"
   publish = "dist"
   functions = "netlify/functions"
-  environment = { 
-    MONGODB_URI = "env:MONGODB_URI",
-    GOOGLE_MAPS_API_KEY = "env:GOOGLE_MAPS_API_KEY"
-  }
 
-# Redirect all routes to index.html (for SPA)
+[build.environment]
+  MONGODB_URI = "env:MONGODB_URI"
+  GOOGLE_MAPS_API_KEY = "env:GOOGLE_MAPS_API_KEY"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Optional: Redirect API calls to Netlify functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
-
-# Optional: Headers to enhance caching and PWA support
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-
-                                                                                                 
