@@ -1,0 +1,21 @@
+# .github/workflows/neon_workflow.yml
+
+name: Neon Branch Database Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+jobs:
+  neon-branch:
+    runs-on: ubuntu-latest
+    name: Create/Remove Neon Branch
+    steps:
+      - uses: neondatabase/create-branch-action@v3
+        with:
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          branch_name: ${{ github.event.pull_request.head.ref }}
+          operation: ${{ github.event.action == 'closed' && 'delete' || 'create' }}
+          parent: main
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
