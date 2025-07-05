@@ -8,7 +8,7 @@
   <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet" />
 
-  <!-- Google Maps API (Replace with your API Key) -->
+  <!-- Google Maps API -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcIGuykmzig6GhOHwOO3h7PlspyasKIic&callback=initMap" async defer></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
@@ -38,7 +38,7 @@
       <div id="nearby-list" class="text-sm text-gray-700">Nearby businesses loading...</div>
     </section>
 
-    <!-- Business Registration Form (Netlify Form) -->
+    <!-- Business Registration Form -->
     <section id="register-section" class="bg-white shadow p-6 rounded-lg mb-10">
       <h2 class="text-lg font-bold mb-4">📝 Register Your Business</h2>
       <form name="register-business" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
@@ -65,10 +65,9 @@
 
   <!-- Scripts -->
 
-  <!-- 🗺️ Google Map with Fake Pins (replace with real coords if available) -->
+  <!-- Google Maps Pins -->
   <script>
     let map;
-
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: -26.3, lng: 27.9 },
@@ -91,7 +90,7 @@
     }
   </script>
 
-  <!-- 📋 Grouped Business Listings by Category -->
+  <!-- Business Listings -->
   <script>
     fetch('/.netlify/functions/list-businesses')
       .then(res => res.json())
@@ -113,7 +112,7 @@
       });
   </script>
 
-  <!-- 💬 Chatbot -->
+  <!-- Chatbot -->
   <script>
     const chatForm = document.getElementById("chat-form");
     const chatInput = document.getElementById("chat-input");
@@ -137,10 +136,12 @@
     });
   </script>
 
-  <!-- 📍 Load Nearby Businesses & Register Form Script -->
+  <!-- Additional JS -->
   <script src="js/geo-nearby.js"></script>
   <script src="js/register-business.js"></script>
- <script src="/gps.js"></script>
+  <script src="/gps.js"></script>
+
+  <!-- 🔗 React Entry -->
+ <script type="module" src="./src/main.jsx"></script>
 </body>
 </html>
-
