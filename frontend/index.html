@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet" />
 
   <!-- Google Maps API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcIGuykmzig6GhOHwOO3h7PlspyasKIic&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
@@ -21,24 +21,20 @@
     </nav>
   </header>
 
-  <!-- Google Map with Business Pins -->
   <div id="map" class="h-96 w-full mb-10"></div>
 
   <main class="max-w-4xl mx-auto px-4">
 
-    <!-- Business List -->
     <section id="business-list" class="mb-10">
       <h2 class="text-xl font-semibold mb-4">📌 Listed Businesses by Category</h2>
       <div id="business-container" class="space-y-6">Loading businesses...</div>
     </section>
 
-    <!-- Nearby Businesses -->
     <section class="bg-white shadow p-6 rounded-lg mb-10">
       <h2 class="text-lg font-bold mb-4">📍 Nearby Businesses</h2>
       <div id="nearby-list" class="text-sm text-gray-700">Nearby businesses loading...</div>
     </section>
 
-    <!-- Business Registration Form -->
     <section id="register-section" class="bg-white shadow p-6 rounded-lg mb-10">
       <h2 class="text-lg font-bold mb-4">📝 Register Your Business</h2>
       <form name="register-business" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
@@ -51,7 +47,6 @@
       </form>
     </section>
 
-    <!-- Chatbot Section -->
     <section class="mt-10 bg-white shadow p-6 rounded-lg">
       <h2 class="text-lg font-bold mb-4">💬 Chat with the Business Bot</h2>
       <div id="chat-window" class="bg-gray-100 p-4 h-48 overflow-y-auto rounded mb-4 text-sm"></div>
@@ -61,11 +56,12 @@
       </form>
     </section>
 
+    <!-- ✅ React Root -->
+    <div id="root"></div>
+
   </main>
 
-  <!-- Scripts -->
-
-  <!-- Google Maps Pins -->
+  <!-- Inline Scripts -->
   <script>
     let map;
     function initMap() {
@@ -90,7 +86,6 @@
     }
   </script>
 
-  <!-- Business Listings -->
   <script>
     fetch('/.netlify/functions/list-businesses')
       .then(res => res.json())
@@ -112,7 +107,6 @@
       });
   </script>
 
-  <!-- Chatbot -->
   <script>
     const chatForm = document.getElementById("chat-form");
     const chatInput = document.getElementById("chat-input");
@@ -136,12 +130,13 @@
     });
   </script>
 
-  <!-- Additional JS -->
-  <script src="js/geo-nearby.js"></script>
-  <script src="js/register-business.js"></script>
-  <script src="/gps.js"></script>
+  <!-- External JS files -->
+  <script type="module" src="./js/geo-nearby.js"></script>
+  <script type="module" src="./js/register-business.js"></script>
+  <script type="module" src="./js/gps.js"></script>
 
-  <!-- 🔗 React Entry -->
- <script type="module" src="/src/main.js"></script>
+  <!-- React App Entry -->
+  <script type="module" src="./src/main.jsx"></script>
+
 </body>
 </html>

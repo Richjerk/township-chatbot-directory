@@ -13,7 +13,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vite": "^7.0.2"
+    "vite": "^7.0.2",
+    "vite-plugin-pwa": "^1.0.1"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0"
   }
 }
-
