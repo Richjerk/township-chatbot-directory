@@ -1,10 +1,7 @@
-// frontend/vite.config.js
-
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  root: '.',
   build: {
     outDir: 'dist',
   },
@@ -35,5 +32,3 @@ export default defineConfig({
     })
   ]
 });
-
-

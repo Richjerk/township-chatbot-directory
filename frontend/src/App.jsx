@@ -1,13 +1,8 @@
-// frontend/src/App.jsx
-import React from 'react';
-
-function App() {
+export default function App() {
   return (
-    <div className="text-center p-8">
-      <h1 className="text-2xl font-bold text-indigo-600">Welcome to Township Directory</h1>
-      <p className="mt-2 text-gray-600">This is the React-powered app shell.</p>
+    <div className="text-center p-4">
+      <h1 className="text-2xl font-bold text-indigo-600">Township Directory Frontend</h1>
+      <p>React is working 🎉</p>
     </div>
   );
 }
-
-export default App;
