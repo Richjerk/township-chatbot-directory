@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "township-chatbot-directory",
+  "private": true,
   "version": "1.0.0",
-  "description": "Frontend for Township Chatbot Directory",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.5.0",
-    "react-router-dom": "^7.6.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "vite": "^7.0.2",
-    "vite-plugin-pwa": "^1.0.1"
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.4.1",
+    "vite": "^7.0.0"
   }
 }
