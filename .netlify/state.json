@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Orange Farm",
+			"country": {
+				"code": "ZA",
+				"name": "South Africa"
+			},
+			"subdivision": {
+				"code": "GP",
+				"name": "Gauteng"
+			},
+			"timezone": "Africa/Johannesburg",
+			"latitude": -26.4809,
+			"longitude": 27.869,
+			"postalCode": "1841"
+		},
+		"timestamp": 1751474803467
+	}
+}

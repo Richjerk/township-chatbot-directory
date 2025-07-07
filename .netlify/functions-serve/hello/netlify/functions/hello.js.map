@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": ["../../../../township-chatbot-directory/netlify/functions/hello.js"],
+  "sourceRoot": "C:/Users/pusel/AppData/Local/Temp/tmp-12380-ElS553CkmNAb",
+  "sourcesContent": ["// netlify/functions/hello.js\r\n\r\nexports.handler = async function (event, context) {\r\n  return {\r\n    statusCode: 200,\r\n    body: JSON.stringify({ message: \"Hello from Netlify Functions!\" })\r\n  };\r\n};\r\n"],
+  "mappings": ";AAEA,QAAQ,UAAU,eAAgB,OAAO,SAAS;AAChD,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,gCAAgC,CAAC;AAAA,EACnE;AACF;",
+  "names": []
+}
