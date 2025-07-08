@@ -2,8 +2,12 @@
 
 [build]
   command = "npm run build"
-  publish = "dist"
-  functions = "netlify/functions"
+  publish = "frontend/dist"
+  base = "frontend"
+
+[functions]
+  directory = "netlify/functions"
+
 
 [build.environment]
   MONGODB_URI = "env:MONGODB_URI"
