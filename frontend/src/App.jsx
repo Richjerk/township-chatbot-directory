@@ -1,9 +1,5 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import Chatbot from './pages/Chatbot';
-import MapView from './pages/MapView';
-import NotFound from './pages/NotFound';
+// src/App.jsx
+import { Outlet, Link } from 'react-router-dom';
 
 export default function App() {
   return (
@@ -13,6 +9,8 @@ export default function App() {
           <h1 className="text-xl font-bold text-indigo-600">🏘️ Township Directory</h1>
           <nav className="flex gap-4 text-sm">
             <Link to="/" className="text-blue-600 hover:underline">Home</Link>
+            <Link to="/register-user" className="text-blue-600 hover:underline">Register User</Link>
+            <Link to="/register-business" className="text-blue-600 hover:underline">Register Business</Link>
             <Link to="/chatbot" className="text-blue-600 hover:underline">Chatbot</Link>
             <Link to="/map" className="text-blue-600 hover:underline">Map</Link>
           </nav>
@@ -20,12 +18,7 @@ export default function App() {
       </header>
 
       <main className="max-w-4xl mx-auto p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/chatbot" element={<Chatbot />} />
-          <Route path="/map" element={<MapView />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Outlet /> {/* renders the current child route */}
       </main>
 
       <footer className="text-center text-xs p-4 text-gray-500">
@@ -34,6 +27,4 @@ export default function App() {
     </div>
   );
 }
-
-
 
