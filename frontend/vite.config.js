@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 
 export default defineConfig({
-  root: '.', // Define root folder for Vite
+  root: '.', // or './frontend' only if you're running vite from the root folder
   plugins: [
     react(),
     VitePWA({
@@ -34,12 +34,8 @@ export default defineConfig({
     })
   ],
   build: {
-    outDir: '../dist',      // Output outside frontend/
-    emptyOutDir: true       // Clean dist before build
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './frontend/src'), // Optional: alias for imports
-    }
+    outDir: '../dist',
+    emptyOutDir: true,
   }
 });
+

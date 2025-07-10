@@ -9,56 +9,17 @@
   <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 
   <body class="bg-gray-50 text-gray-800 font-sans">
-    <div id="root">
-      <!-- ✅ User Registration Form -->
-      <section id="user-register" class="bg-white shadow p-6 rounded-lg mb-10">
-        <h2 class="text-lg font-bold mb-4">👤 Register as a Customer</h2>
-        <form id="user-form" class="space-y-4">
-          <label>
-            <input type="text" name="username" placeholder="Full Name" required class="border p-2 rounded w-full" />
-          </label>
-          <label>
-            <input type="email" name="email" placeholder="Email Address" required class="border p-2 rounded w-full" />
-          </label>
-          <label>
-            <input type="tel" name="phone" placeholder="WhatsApp Number" required class="border p-2 rounded w-full" />
-          </label>
-          <label>
-            <input type="text" name="userAddress" placeholder="Current Address" id="user-location" readonly class="border p-2 rounded w-full bg-gray-100" />
-          </label>
-          <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Register User</button>
-          <p id="user-msg" class="text-sm mt-2 text-green-600 hidden">✅ Registration successful!</p>
-        </form>
-      </section>
+    <!-- ✅ React App Root -->
+    <div id="root"></div>
 
-      <!-- ✅ Business Registration Form -->
-      <section id="business-register" class="bg-white shadow p-6 rounded-lg mb-10">
-        <h2 class="text-lg font-bold mb-4">🏢 Register Your Business</h2>
-        <form id="business-form" class="space-y-4">
-          <label>
-            <input type="text" name="businessName" placeholder="Business Name" required class="border p-2 rounded w-full" />
-          </label>
-          <label>
-            <select name="category" id="category-dropdown" required class="border p-2 rounded w-full">
-              <option value="">Select Business Category</option>
-            </select>
-          </label>
-          <label>
-            <input type="text" name="address" placeholder="Business Location (Auto)" id="business-location" readonly class="border p-2 rounded w-full bg-gray-100" />
-          </label>
-          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Register Business</button>
-          <p id="biz-msg" class="text-sm mt-2 text-green-600 hidden">✅ Business registered successfully!</p>
-        </form>
+    <!-- ✅ Static fallback content (optional for no-js users) -->
+    <noscript>
+      <section class="bg-white shadow p-6 rounded-lg mb-10">
+        <h2>JavaScript is required to use this app.</h2>
       </section>
+    </noscript>
 
-      <!-- ✅ Display Listed Businesses -->
-      <section id="business-list" class="mb-10">
-        <h2 class="text-xl font-semibold mb-4">📌 Listed Businesses by Category</h2>
-        <div id="business-container" class="space-y-6">Loading businesses...</div>
-      </section>
-    </div>
-
-    <!-- ✅ Inline Script -->
+    <!-- ✅ Inline Location + Registration Script -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const fillLocation = (inputId) => {
@@ -71,7 +32,6 @@
                 }
               },
               (err) => {
-                console.warn("Geolocation failed:", err.message);
                 const input = document.getElementById(inputId);
                 if (input) {
                   input.placeholder = "Location not available";
@@ -143,7 +103,8 @@
     </script>
 
     <!-- ✅ External Modules -->
-    <!-- React entry file (only include if you're using React inside root div) -->
+
+    <!-- ✅ React App Entry Point -->
   </body>
 </html>
 
