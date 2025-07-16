@@ -1,110 +1,14 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Township Chatbot Directory</title>
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <script type="module" crossorigin src="/assets/index-CD8O3d_S.js"></script>
-  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
-
-  <body class="bg-gray-50 text-gray-800 font-sans">
-    <!-- ✅ React App Root -->
-    <div id="root"></div>
-
-    <!-- ✅ Static fallback content (optional for no-js users) -->
-    <noscript>
-      <section class="bg-white shadow p-6 rounded-lg mb-10">
-        <h2>JavaScript is required to use this app.</h2>
-      </section>
-    </noscript>
-
-    <!-- ✅ Inline Location + Registration Script -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const fillLocation = (inputId) => {
-          if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-              (pos) => {
-                const input = document.getElementById(inputId);
-                if (input) {
-                  input.value = `Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`;
-                }
-              },
-              (err) => {
-                const input = document.getElementById(inputId);
-                if (input) {
-                  input.placeholder = "Location not available";
-                }
-              }
-            );
-          }
-        };
-
-        fillLocation("user-location");
-        fillLocation("business-location");
-
-        const loadCategories = () => {
-          fetch("/.netlify/functions/list-businesses")
-            .then((res) => res.json())
-            .then((data) => {
-              const dropdown = document.getElementById("category-dropdown");
-              const categories = [...new Set(data.map((b) => b.category))];
-              categories.forEach((cat) => {
-                const opt = document.createElement("option");
-                opt.value = cat;
-                opt.textContent = cat;
-                dropdown.appendChild(opt);
-              });
-            })
-            .catch((err) => console.error("Failed to load categories", err));
-        };
-
-        loadCategories();
-
-        const userForm = document.getElementById("user-form");
-        userForm?.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const msg = document.getElementById("user-msg");
-          msg?.classList.remove("hidden");
-          setTimeout(() => msg?.classList.add("hidden"), 3000);
-        });
-
-        const bizForm = document.getElementById("business-form");
-        bizForm?.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const data = {
-            businessName: bizForm.businessName.value,
-            category: bizForm.category.value,
-            address: bizForm.address.value,
-          };
-
-          try {
-            const res = await fetch("/.netlify/functions/register-business", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
-
-            const result = await res.json();
-            if (res.ok) {
-              const msg = document.getElementById("biz-msg");
-              msg?.classList.remove("hidden");
-              setTimeout(() => msg?.classList.add("hidden"), 3000);
-              bizForm.reset();
-            } else {
-              alert("❌ Error: " + (result.error || "Unknown error"));
-            }
-          } catch (err) {
-            alert("❌ Network Error: " + err.message);
-          }
-        });
-      });
-    </script>
-
-    <!-- ✅ External Modules -->
-
-    <!-- ✅ React App Entry Point -->
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Township Chatbot Directory</title>
+  <script type="module" crossorigin src="/assets/index-CpOcvaTY.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CW1ww-9x.css">
+</head>
+<body>
+  <div id="app"></div>
+</body>
 </html>
-
